@@ -7,6 +7,9 @@ SKILLS_DIR="${HOME}/.claude/skills"
 DEST="${SKILLS_DIR}/${SKILL_NAME}"
 USER_CACHE="${DEST}/refs/user-cache.json"
 
+# Sub-skills bundled in the repo under .claude/skills/
+SUB_SKILLS=("lemme-slack")
+
 # ── helpers ───────────────────────────────────────────────────────────────────
 info()  { printf '\033[0;34m[info]\033[0m  %s\n' "$*"; }
 ok()    { printf '\033[0;32m[ok]\033[0m    %s\n' "$*"; }
@@ -43,5 +46,24 @@ fi
 
 ok "Skill files ready at ${DEST}"
 
-# ── Claude Code picks up skills automatically from ~/.claude/skills/<name>/SKILL.md
-ok "/${SKILL_NAME} is now available in Claude Code — try it with /self-eval"
+# ── symlink sub-skills ────────────────────────────────────────────────────────
+for sub in "${SUB_SKILLS[@]}"; do
+  src="${DEST}/.claude/skills/${sub}"
+  link="${SKILLS_DIR}/${sub}"
+  if [[ ! -d "${src}" ]]; then
+    info "Sub-skill source not found, skipping: ${src}"
+    continue
+  fi
+  if [[ -L "${link}" ]]; then
+    info "/${sub} symlink already exists — skipping"
+  elif [[ -e "${link}" ]]; then
+    die "/${sub} exists at ${link} but is not a symlink — remove it manually and re-run"
+  else
+    ln -s "${src}" "${link}"
+    ok "/${sub} symlinked at ${link}"
+  fi
+done
+
+# ── done ─────────────────────────────────────────────────────────────────────
+printf '\n'
+ok "Installation complete! You can now run /self-eval and kickstart the process or run /lemme-slack to create a summary of work done based on your Slack (requires MCP)."
