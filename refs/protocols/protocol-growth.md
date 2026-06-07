@@ -50,11 +50,14 @@ Read `refs/principles/principles-pandora.md` and `refs/principles/principles-des
 
 ## Draft paragraph
 
-Read `refs/output-template.md` and `refs/framework-design-ic.md`. Use the Growth Area Exemplars section to calibrate framing by level. If `job` in `user-cache.json` is a product designer role, apply the level-specific scope, responsibility, and accountability expectations.
+Read `refs/template.md` and `refs/framework-design-ic.md`. Use the Growth Area Exemplars section to calibrate framing by level. If `job` in `user-cache.json` is a product designer role, apply the level-specific scope, responsibility, and accountability expectations.
 
 Generate one first-person paragraph:
-- Apply STAR structure: Situation → Task → Action → Result.
-- Anchor the Situation sentence to `review_period` (e.g. "During MYR 2026…").
+- Apply SBI structure: Situation → Behavior → Impact.
+- Situation must name the specific moment when the gap was noticed or surfaced — a critique, a retro, a piece of feedback, a self-review. Not just a time period.
+- Behavior sentences must state the concrete steps taken to address the gap — with active verbs and specific objects. Apply hard rule 2: no "worked on improving", "focused on developing", "made efforts to".
+- Impact names what has concretely changed, or — if still in progress — the specific next step and timeframe.
 - Frame as a development intention, not a failure — what was recognised, what is being built.
-- Reference the matched principles from the cross-check.
+- Reference the matched principles from the cross-check (show them; do not name-drop).
+- Apply the quality checklist from `refs/template.md` before emitting.
 - Cap at 15 lines.
