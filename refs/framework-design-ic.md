@@ -374,6 +374,10 @@ Use this section in Step 4b and Step 6 when the output type is "growth area". Pr
 | 2 | **Design communication** | Building ability to craft a clear narrative around a design decision in a critique or stakeholder review — not just presenting work, but defending it with user rationale. |
 | 3 | **End-to-end quality ownership** | Taking full ownership of handoff documentation and QA without requiring a senior to check; measuring whether what shipped matched what was designed. |
 | 4 | **Domain-level awareness** | Starting to understand how their squad's work connects to broader product goals and business context — not just the feature, but the why behind prioritisation. |
+| 5 | **PM collaboration** | Moving from receiving a defined brief to actively asking clarifying questions about the problem — understanding the PM's constraints, success metrics, and trade-offs before designing. |
+| 6 | **Data fluency** | Beginning to use analytics dashboards and experiment results to validate design decisions rather than relying solely on peer or PM feedback. |
+| 7 | **Engineering collaboration** | Flagging feasibility risks during design (not at handoff); following up post-launch to check whether the shipped product matched the intended design. |
+| 8 | **AI-nativeness** | Integrating AI tools into the personal design workflow — using them for generative exploration, research synthesis, or copy drafting — and beginning to understand the UX conventions for AI-powered features (loading states, confidence signals, error recovery). |
 
 ### IC3 — Senior Product Designer
 
@@ -383,6 +387,10 @@ Use this section in Step 4b and Step 6 when the output type is "growth area". Pr
 | 2 | **Facilitation and workshop leadership** | Leading design critiques and alignment workshops with confidence; managing time, drawing out quieter voices, and producing a clear decision or next step. |
 | 3 | **Experience design breadth** | Expanding from screen-level design to mapping full user journeys and service blueprints; identifying gaps that go beyond the immediate product surface. |
 | 4 | **Chapter contribution** | Moving from participating in chapter rituals to actively shaping them — proposing a format, running a session, or contributing a perspective on design craft standards. |
+| 5 | **Product discovery leadership** | Proactively identifying opportunity spaces before a PM has defined the problem — bringing user research, behavioural data, or competitive signals to open a discovery conversation rather than waiting for a brief. |
+| 6 | **PM collaboration — problem co-authorship** | Co-writing problem statements and success metrics with the PM; influencing prioritisation by connecting user insight to business impact, not just flagging UX concerns after decisions are made. |
+| 7 | **Data fluency** | Independently pulling and interpreting product analytics to justify a design direction or challenge a PM's assumption; presenting a data-backed case in a cross-functional review. |
+| 8 | **AI-nativeness** | Designing AI-powered surfaces end-to-end — handling prompts, uncertainty states, trust signals, and degraded-mode fallbacks — while also using AI tools to accelerate discovery and prototyping across the squad. |
 
 ### IC4 — Staff Product Designer
 
@@ -392,6 +400,8 @@ Use this section in Step 4b and Step 6 when the output type is "growth area". Pr
 | 2 | **Design strategy contribution** | Moving from executing on strategy to co-authoring it — working with domain or chapter leads to propose a design direction that connects to business goals, not just responding to roadmaps. |
 | 3 | **Tribe-level influence** | Expanding visibility beyond one domain to shape decisions at tribe level — aligning with peers across domains, influencing product direction, and being seen as a go-to for complex problem spaces. |
 | 4 | **External representation** | Beginning to represent design externally — internal talks, blog posts, or conference submissions — as a foundation for the IC5 expectation of attracting talent and elevating the team's reputation. |
+| 5 | **Domain-level data fluency** | Using product and UX data to assess impact across the full domain — not just a single feature — and using those insights to inform strategy conversations with PMs and engineering leads. |
+| 6 | **AI-nativeness — domain standard-setting** | Defining how AI tools and AI-powered surfaces are approached across the domain: establishing shared conventions, reviewing AI feature designs for quality and trust, and guiding junior designers in this space. |
 
 ### IC5 — Principal Product Designer
 
@@ -400,6 +410,7 @@ Use this section in Step 4b and Step 6 when the output type is "growth area". Pr
 | 1 | **Organization-wide design standard-setting** | Moving from contributing to standards to defining and socialising them across the organization — publishing frameworks, running training, and measuring adoption. |
 | 2 | **Strategic integration with product and business** | Going beyond design strategy to influence product line vision and business goals directly — partnering with tribe leads and senior product stakeholders to shape what gets built and why. |
 | 3 | **Mentorship at scale** | Shifting from mentoring individuals to developing the mentorship capability of other senior designers — coaching coaches, creating systems, and raising the bar for how the chapter develops its people. |
+| 4 | **AI-nativeness — org-wide leadership** | Leading the organization's thinking on designing for AI — authoring principles for AI-powered UX, setting quality standards for AI surfaces, and shaping how the chapter builds capability in this space. |
 
 ---
 
