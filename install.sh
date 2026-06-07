@@ -54,14 +54,13 @@ for sub in "${SUB_SKILLS[@]}"; do
     info "Sub-skill source not found, skipping: ${src}"
     continue
   fi
-  if [[ -L "${link}" ]]; then
-    info "/${sub} symlink already exists — skipping"
-  elif [[ -e "${link}" ]]; then
+  if [[ -e "${link}" && ! -L "${link}" ]]; then
     die "/${sub} exists at ${link} but is not a symlink — remove it manually and re-run"
-  else
-    ln -s "${src}" "${link}"
-    ok "/${sub} symlinked at ${link}"
   fi
+  # Remove stale or existing symlink so re-installs always get a fresh link
+  [[ -L "${link}" ]] && rm "${link}"
+  ln -s "${src}" "${link}"
+  ok "/${sub} symlinked at ${link}"
 done
 
 # ── done ─────────────────────────────────────────────────────────────────────
