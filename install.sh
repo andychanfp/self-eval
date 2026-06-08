@@ -4,8 +4,6 @@ set -euo pipefail
 REPO="https://github.com/andychanfp/self-eval.git"
 SKILL_NAME="self-eval"
 SKILLS_DIR="${HOME}/.claude/skills"
-DEST="${SKILLS_DIR}/${SKILL_NAME}"
-USER_CACHE="${DEST}/refs/user-cache.json"
 
 # Sub-skills bundled in the repo under .claude/skills/
 SUB_SKILLS=("lemme-slack")
@@ -15,6 +13,27 @@ info()  { printf '\033[0;34m[info]\033[0m  %s\n' "$*"; }
 ok()    { printf '\033[0;32m[ok]\033[0m    %s\n' "$*"; }
 die()   { printf '\033[0;31m[error]\033[0m %s\n' "$*" >&2; exit 1; }
 
+# ── parse args ────────────────────────────────────────────────────────────────
+INSTALL_MODE="all"  # "all" | "lemme-slack"
+
+for arg in "$@"; do
+  case "${arg}" in
+    --skill=lemme-slack) INSTALL_MODE="lemme-slack" ;;
+    --skill=*)           die "Unknown skill: ${arg#--skill=}. Available: lemme-slack" ;;
+    *)                   die "Unknown argument: ${arg}" ;;
+  esac
+done
+
+# In lemme-slack-only mode, clone to a hidden source dir so self-eval is not
+# exposed as a skill. In full mode, clone directly into the skills directory.
+if [[ "${INSTALL_MODE}" == "lemme-slack" ]]; then
+  DEST="${HOME}/.claude/.self-eval-src"
+  USER_CACHE=""
+else
+  DEST="${SKILLS_DIR}/${SKILL_NAME}"
+  USER_CACHE="${DEST}/refs/user-cache.json"
+fi
+
 # ── preflight ─────────────────────────────────────────────────────────────────
 command -v git    >/dev/null 2>&1 || die "git is required but not found"
 command -v claude >/dev/null 2>&1 || die "Claude Code CLI (claude) is required but not found"
@@ -23,11 +42,11 @@ command -v claude >/dev/null 2>&1 || die "Claude Code CLI (claude) is required b
 mkdir -p "${SKILLS_DIR}"
 
 if [[ -d "${DEST}/.git" ]]; then
-  info "Skill already installed — pulling latest..."
+  info "Source already installed — pulling latest..."
 
-  # Preserve user-cache.json if it has been populated
+  # Preserve user-cache.json if it has been populated (full install only)
   cache_backup=""
-  if [[ -f "${USER_CACHE}" ]] && grep -qv '""' "${USER_CACHE}" 2>/dev/null; then
+  if [[ -n "${USER_CACHE}" && -f "${USER_CACHE}" ]] && grep -qE '"(job|role|level)": "[^"]' "${USER_CACHE}" 2>/dev/null; then
     cache_backup="$(cat "${USER_CACHE}")"
     info "Preserving existing user-cache.json..."
   fi
@@ -44,7 +63,7 @@ else
   git clone "${REPO}" "${DEST}"
 fi
 
-ok "Skill files ready at ${DEST}"
+ok "Source files ready at ${DEST}"
 
 # ── symlink sub-skills ────────────────────────────────────────────────────────
 for sub in "${SUB_SKILLS[@]}"; do
@@ -65,4 +84,8 @@ done
 
 # ── done ─────────────────────────────────────────────────────────────────────
 printf '\n'
-ok "Installation complete! You can now run /self-eval and kickstart the process or run /lemme-slack to create a summary of work done based on your Slack (requires MCP)."
+if [[ "${INSTALL_MODE}" == "lemme-slack" ]]; then
+  ok "Installation complete! You can now run /lemme-slack (requires Slack MCP)."
+else
+  ok "Installation complete! You can now run /self-eval and kickstart the process or run /lemme-slack to create a summary of work done based on your Slack (requires MCP)."
+fi

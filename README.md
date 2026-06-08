@@ -33,16 +33,24 @@ A standalone sub-skill that scans your Slack history to surface evidence before 
 | `/lemme-slack <project> colleague: @name` | Filters to messages from a specific colleague |
 | `/lemme-slack <project> period: "Q1 2025"` | Restricts results to a date range |
 | `/lemme-slack <project> channels: #chan1 #chan2` | Skips channel discovery; searches those channels only |
+| `/lemme-slack --feedback colleague: @name` | Feedback mode — surfaces what a colleague did with you; outputs strengths + improvement areas |
+| `/lemme-slack Feedback for <name> from <period>` | Same feedback mode, parsed from prose |
 
 ## 🚀 Installation
 
-**One-time installation**
+**Install both `self-eval` and `lemme-slack`**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/andychanfp/self-eval/main/install.sh | bash
 ```
 
-This installs both `/self-eval` and `/lemme-slack` into `~/.claude/skills/`. To update, rerun the same command.
+**Install `lemme-slack` only**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/andychanfp/self-eval/main/install.sh | bash -s -- --skill=lemme-slack
+```
+
+To update, rerun the same command. The `--skill=lemme-slack` flag clones the source to `~/.claude/.self-eval-src/` (hidden) so only `/lemme-slack` is exposed as a skill.
 
 ## 🔎 How it works
 
@@ -62,4 +70,4 @@ This installs both `/self-eval` and `/lemme-slack` into `~/.claude/skills/`. To 
 
 ## 🙏🏻 Thank you
 
-A huge thank you to Joan for building the [slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) skill, which formed the base of the supplementary skill to this repo. [Slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) functions differently: it's a deeper dive that's more lightweight than `lemme-slack`, which is focused on summarisation.
+A huge thank you to Joan for building the [slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) skill, which formed the base of the supplementary skill to this repo. [Slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) functions differently: it's a lighter-weight deep dive, whereas `lemme-slack` focuses on summarisation and peer feedback synthesis.
