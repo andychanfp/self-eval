@@ -9,6 +9,8 @@ Relieve your pain with a simple Claude skill that helps you scaffold either your
 
 `self-eval` ships with `lemme-slack`: another lightweight skill that checks Slack (using Slack MCP) for past interactions to bolster your self-eval and refresh your memory. Adapted loosely on [Joan Chiang](https://github.com/joan-chiangwq)'s [slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) skill.
 
+It also ships with `write-360`: a peer feedback skill that drafts strength or constructive feedback paragraphs for a named colleague in SBI format (Situation → Behaviour → Impact), anchored to the Pandora career framework.
+
 </div>
 
 ## ⚒️ Usage
@@ -36,6 +38,18 @@ A standalone sub-skill that scans your Slack history to surface evidence before 
 | `/lemme-slack --feedback colleague: @name` | Feedback mode — surfaces what a colleague did with you; outputs strengths + improvement areas |
 | `/lemme-slack Feedback for <name> from <period>` | Same feedback mode, parsed from prose |
 
+### write-360
+
+A standalone sub-skill that drafts SBI-format peer feedback paragraphs anchored to the Pandora career framework. Pairs with `/lemme-slack --feedback` to pull Slack evidence before drafting.
+
+| Command | Usage |
+| -- | -- |
+| `/write-360` | Guided flow — prompts for colleague name, role, and feedback type |
+| `/write-360 strength for <name> (<role>)` | Drafts a strength paragraph directly |
+| `/write-360 constructive for <name> (<role>)` | Drafts a constructive feedback paragraph directly |
+
+**Tip**: run `/lemme-slack --feedback colleague: @name` first and paste the output into your `/write-360` prompt as examples. The skill will use the Slack evidence to ground the SBI paragraph.
+
 ## 🚀 Installation
 
 **Install both `self-eval` and `lemme-slack`**
@@ -50,7 +64,13 @@ curl -fsSL https://raw.githubusercontent.com/andychanfp/self-eval/main/install.s
 curl -fsSL https://raw.githubusercontent.com/andychanfp/self-eval/main/install.sh | bash -s -- --skill=lemme-slack
 ```
 
-To update, rerun the same command. The `--skill=lemme-slack` flag clones the source to `~/.claude/.self-eval-src/` (hidden) so only `/lemme-slack` is exposed as a skill.
+**Install `write-360` only**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/andychanfp/self-eval/main/install.sh | bash -s -- --skill=write-360
+```
+
+To update, rerun the same command. The `--skill=` flags clone the source to `~/.claude/.self-eval-src/` (hidden) so only the requested skill is exposed.
 
 ## 🔎 How it works
 

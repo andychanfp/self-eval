@@ -2,18 +2,16 @@
 name: write-360
 description: Writes peer feedback paragraphs for a named colleague in SBI format (Situation → Behaviour → Impact), anchored to the Pandora career framework. Activates on /write-360 or when called by another skill. Refuses feedback that is vague, characterises personality, or names protected characteristics.
 model: claude-sonnet-4-6
-allowedTools: [Read]
+allowedTools: [Read, Skill]
 ---
 
 ## Usage
 
-**Invoke**: `/write-360` — pass a colleague's name, role, feedback type, and any examples inline, or answer the prompts.
+**Invoke**: `/write-360` — the skill triages you through inputs step by step.
 
 - Slash command `/write-360`
 - Natural-language: "write feedback for", "draft a 360 for", "write a strength for [name]", "write constructive feedback for [name]"
 - Called by another skill (e.g. `/self-eval`) with name, role, and type pre-filled
-
-**Optional**: Run `/lemme-slack` before invoking to gather Slack evidence. Paste the output inline — this skill treats it as examples.
 
 ---
 
@@ -21,10 +19,10 @@ allowedTools: [Read]
 
 | Name | Format | Source |
 |------|--------|--------|
-| name | string | user message or calling skill |
-| role | string | user message or calling skill |
-| type | `strength` or `constructive` | user message or calling skill |
-| examples | free-text, optional | user message or `/lemme-slack` output |
+| name | string | triage prompt or calling skill |
+| role | string | triage prompt or calling skill |
+| type | `strength` or `constructive` | triage prompt or calling skill |
+| examples | free-text, optional | triage prompt prose or Slack scan |
 
 ---
 
@@ -73,6 +71,7 @@ See `refs/protocol.md` for the full step-by-step protocol.
 ## References
 
 - `refs/protocol.md` — step-by-step execution protocol (6 steps, SBI drafting, refusal conditions)
+- `refs/template.md` — SBI output template, strength + constructive exemplars, Pandora principles anchor table
 - `refs/framework/framework-design-ic.md` — Pandora IC levels, competencies, and language for Product Design roles
 - `refs/framework/framework-eng-ic.md` — Pandora IC levels and competencies for Engineering roles
 - `refs/framework/framework-eng-em.md` — Pandora EM levels and competencies for Engineering managers

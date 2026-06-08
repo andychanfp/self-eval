@@ -8,34 +8,75 @@ Emit `Step X/6 — <title>` at the start of each step, unconditionally.
 
 ## Step-by-step protocol
 
-**Step 1 — Collect inputs** `[model: sonnet]`
+**Step 1 — Triage**
 
-Read `name`, `role`, `type`, and `examples` from the invocation message or the calling skill's payload. If any required field (`name`, `role`, `type`) is missing, ask for it before proceeding. Produce: a filled input record.
+Ask the following questions in sequence, one at a time, waiting for each answer before asking the next:
 
-**Step 2 — Check refusal conditions** `[model: sonnet]`
+1. **Who is this for?** — Ask for the colleague's name and role.
+2. **Feedback type** — "Are you writing constructive feedback or highlighting a strength?" (select: Strength / Constructive)
+3. **Specific feedback points** — "Do you have specific feedback points or examples in mind?" (free-text prose; OK to leave blank)
+4. **Slack scan** — "Should I scan Slack for context on [name]?" (Yes / No)
 
-Scan the input record and examples for three conditions:
+Produce: a filled triage record — `name`, `role`, `type`, `examples` (may be empty), `slack_scan` (bool).
+
+---
+
+**Step 2 — Slack scan (conditional)**
+
+If `slack_scan` is true: invoke `/lemme-slack` with the colleague's name as the argument. Collect the output and append it to `examples`.
+
+If `slack_scan` is false: skip this step.
+
+Produce: enriched examples (original prose + any Slack evidence).
+
+---
+
+**Step 3 — Check refusal conditions**
+
+Scan the triage record and examples for:
 
 - **Protected characteristic**: any mention of age, gender, ethnicity, religion, health, family status, or similar
 - **No specific behaviour**: only trait labels ("difficult", "quiet", "negative") with no named action in a named context
 - **Personal attack**: language that characterises the person rather than describing what they did
 
-If any condition fires, stop. Name the condition, quote the offending phrase, and ask the user to provide a concrete situation and observed behaviour. Do not proceed to Step 3 until the input is corrected. Produce: cleared status or refusal notice.
+If any condition fires: stop. Name the condition, quote the offending phrase, and ask the user to provide a concrete situation and observed behaviour. Do not proceed to Step 4 until the input is corrected.
 
-**Step 3 — Draft the SBI paragraph** `[model: sonnet]`
+Produce: cleared status or refusal notice.
 
-Load the appropriate Pandora framework file from `refs/framework/` based on the colleague's role (design IC → `framework-design-ic.md`, eng IC → `framework-eng-ic.md`, EM → `framework-eng-em.md`). Draft a 3–5 sentence feedback paragraph following SBI structure:
+---
+
+**Step 4 — Surface feedback points**
+
+Load `refs/template.md` for the SBI model and Pandora principles anchor table. Load the appropriate framework file from `refs/framework/` based on role (design IC → `framework-design-ic.md`, eng IC → `framework-eng-ic.md`, EM → `framework-eng-em.md`).
+
+Analyse the examples and any Slack evidence. Generate a table of 3–6 potential feedback points:
+
+| # | Situation | Behaviour | Potential impact |
+|---|-----------|-----------|-----------------|
+| 1 | … | … | … |
+
+Ask: "Which of these would you like to build the paragraph from? Select by number, rephrase a row, or add your own."
+
+Produce: user-selected or user-revised feedback points.
+
+---
+
+**Step 5 — Draft the SBI paragraph**
+
+Using the selected feedback points, draft a 3–5 sentence feedback paragraph following SBI structure:
 
 - **Situation**: when and in what project or context
 - **Behaviour**: what the person did or said, specifically — not what they are
-- **Impact**: effect on the team, the customer, or the product
+- **Impact**: effect on the team, the customer, or the product; reflect a Pandora principle through the behaviour (show, don't label)
 
 For `strength` feedback: name what went well and why it mattered.
-For `constructive` feedback: name the gap, the observed behaviour that created it, and a concrete direction to improve.
+For `constructive` feedback: acknowledge what the person did well → name the specific gap → open a forward path using "even more" or "even better" framing toward a concrete outcome.
 
-Anchor language to the Pandora framework where relevant — ownership, craft, customer focus, collaboration. Produce: draft feedback paragraph.
+Produce: draft feedback paragraph.
 
-**Step 4 — Present draft and gate on approval** `[model: sonnet]`
+---
+
+**Step 6 — Gate and finalize**
 
 Emit the formatted output block:
 
@@ -49,13 +90,7 @@ Type: <type>
 
 Ask: "Approve, or would you like one revision?"
 
-- If approved → skip to Step 6
-- If revision requested → Step 5
+- If approved → the block above is the final output
+- If revision requested → take the user's note, redraft incorporating it, emit the updated block as final (no further revision)
 
-**Step 5 — Redraft with user's note** `[model: sonnet]`
-
-Take the user's revision note. Redraft the paragraph incorporating the note. Emit the updated output block. This is the final draft — no further revision. Produce: revised feedback paragraph.
-
-**Step 6 — Emit final output** `[model: sonnet]`
-
-Emit the approved or revised formatted block as the final output. If called by another skill, return the block as the handoff payload.
+If called by another skill, return the final block as the handoff payload.
