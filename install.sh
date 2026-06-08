@@ -6,7 +6,7 @@ SKILL_NAME="self-eval"
 SKILLS_DIR="${HOME}/.claude/skills"
 
 # Sub-skills bundled in the repo under .claude/skills/
-SUB_SKILLS=("lemme-slack")
+SUB_SKILLS=("lemme-slack" "write-360")
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 info()  { printf '\033[0;34m[info]\033[0m  %s\n' "$*"; }
@@ -19,14 +19,15 @@ INSTALL_MODE="all"  # "all" | "lemme-slack"
 for arg in "$@"; do
   case "${arg}" in
     --skill=lemme-slack) INSTALL_MODE="lemme-slack" ;;
-    --skill=*)           die "Unknown skill: ${arg#--skill=}. Available: lemme-slack" ;;
+    --skill=write-360)   INSTALL_MODE="write-360" ;;
+    --skill=*)           die "Unknown skill: ${arg#--skill=}. Available: lemme-slack, write-360" ;;
     *)                   die "Unknown argument: ${arg}" ;;
   esac
 done
 
 # In lemme-slack-only mode, clone to a hidden source dir so self-eval is not
 # exposed as a skill. In full mode, clone directly into the skills directory.
-if [[ "${INSTALL_MODE}" == "lemme-slack" ]]; then
+if [[ "${INSTALL_MODE}" == "lemme-slack" || "${INSTALL_MODE}" == "write-360" ]]; then
   DEST="${HOME}/.claude/.self-eval-src"
   USER_CACHE=""
 else
@@ -66,6 +67,11 @@ fi
 ok "Source files ready at ${DEST}"
 
 # ── symlink sub-skills ────────────────────────────────────────────────────────
+# In selective mode, only symlink the requested sub-skill
+if [[ "${INSTALL_MODE}" == "lemme-slack" || "${INSTALL_MODE}" == "write-360" ]]; then
+  SUB_SKILLS=("${INSTALL_MODE}")
+fi
+
 for sub in "${SUB_SKILLS[@]}"; do
   src="${DEST}/.claude/skills/${sub}"
   link="${SKILLS_DIR}/${sub}"
@@ -86,6 +92,8 @@ done
 printf '\n'
 if [[ "${INSTALL_MODE}" == "lemme-slack" ]]; then
   ok "Installation complete! You can now run /lemme-slack (requires Slack MCP)."
+elif [[ "${INSTALL_MODE}" == "write-360" ]]; then
+  ok "Installation complete! You can now run /write-360."
 else
   ok "Installation complete! You can now run /self-eval and kickstart the process or run /lemme-slack to create a summary of work done based on your Slack (requires MCP)."
 fi
