@@ -18,7 +18,7 @@ Read `refs/principles/principles-pandora.md` and `refs/principles/principles-des
 
 ## Draft paragraph
 
-Read `refs/template.md`. If `job` in `user-cache.json` is a product designer role (e.g. "product designer", "associate product designer", "senior product designer"), also read `refs/framework-design-ic.md` and apply the framing rules for the user's `level` — scope, responsibility, and accountability must match the level description.
+Read `refs/template.md`. If `job` in `user-cache.json` is a product designer role (e.g. "product designer", "associate product designer", "senior product designer"), also read `refs/framework/framework-design-ic.md` and apply the framing rules for the user's `level` — scope, responsibility, and accountability must match the level description.
 
 Generate one first-person paragraph:
 - Apply SBI structure: Situation → Behavior → Impact.

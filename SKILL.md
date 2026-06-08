@@ -153,7 +153,7 @@ If rewrite, ask a follow-up with exactly two options:
 
    Before spawning, resolve the ref list from `refs/user-cache.json`:
    - **Always load**: `refs/principles/principles-pandora.md`, `refs/template.md`, and the active protocol.
-   - **Load based on `job`**: if `job` is "product designer" → also load `refs/principles/principles-design.md` and `refs/framework-design-ic.md`. For other roles, load the corresponding framework ref if one exists; skip if none.
+   - **Load based on `job`**: if `job` is "product designer" → also load `refs/principles/principles-design.md` and `refs/framework/framework-design-ic.md`. For other roles, load the corresponding framework ref if one exists (e.g. `refs/framework/framework-eng-ic.md` for software engineers, `refs/framework/framework-eng-em.md` for engineering managers); skip if none.
 
    > You are an adversarial reviewer for a Delivery Hero / Foodpanda self-evaluation paragraph written in SBI style. Evaluate the paragraph against the refs provided and the four SBI hard rules: (1) one block per moment, (2) behavior from evidence only, (3) grounded situation with a named setting, (4) traceable impact. For each weakness found, state: (a) what is weak, (b) which hard rule or principle/framework criterion it violates (name it explicitly), (c) one concrete suggestion to fix it. Be blunt. Do not pad. Output a numbered list only.
 
@@ -175,6 +175,8 @@ This skill and its refs load on activation and are cached for the session. Keep 
 - `refs/protocols/protocol-growth.md` — growth area interview, cross-check, and draft instructions
 - `refs/principles/principles-pandora.md` — Pandora principles for cross-check
 - `refs/principles/principles-design.md` — design-specific principles for cross-check
-- `refs/framework-design-ic.md` — Pandora IC1–IC5 track for Product Design
+- `refs/framework/framework-design-ic.md` — Pandora IC1–IC5 track for Product Design
+- `refs/framework/framework-eng-ic.md` — DH IC1–IC6 track for Software Engineers
+- `refs/framework/framework-eng-em.md` — DH M1–M4 track for Engineering Managers
 - `refs/template.md` — STAR sentence stems and free-form section pointers
 - `.claude/skills/lemme-slack/SKILL.md` — sub-skill: Slack history scanner; loaded on-demand in Step 2.5

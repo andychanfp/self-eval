@@ -16,7 +16,10 @@ These are company-wide categories derived from the Pandora principles. Use them 
 ## Interview
 
 1. Read `user-cache.json` to get `level` and `job`.
-2. Read `refs/framework-design-ic.md` — Growth Area Exemplars section — for the user's `level`.
+2. Read the appropriate framework ref for the user's `job` and `level`:
+   - Product designer → `refs/framework/framework-design-ic.md` (Growth Area Exemplars section)
+   - Software engineer (IC) → `refs/framework/framework-eng-ic.md` (Growth Area Exemplars section)
+   - Engineering manager → `refs/framework/framework-eng-em.md` (Growth Area Exemplars section)
 3. **Present exactly four options** using AskUserQuestion (single-select):
    - **Options 1–3**: The top 3 most suitable growth areas for the user's level. For each, write a label (the growth area name) and a one-sentence description explaining why it is relevant at this level, referencing the level-specific exemplar from the framework.
    - **Option 4**: "Describe my own" — user will type a free-text area in the next turn.
@@ -27,7 +30,7 @@ These are company-wide categories derived from the Pandora principles. Use them 
 
 ## Designer-specific seed categories
 
-Use these when `job` is a product designer role. When recommending, select from this list based on what is highest-priority for the user's level (see Growth Area Exemplars in `refs/framework-design-ic.md`). Do not present the full list — pick the 2–3 most relevant and explain why.
+Use these when `job` is a product designer role. When recommending, select from this list based on what is highest-priority for the user's level (see Growth Area Exemplars in the appropriate framework ref). Do not present the full list — pick the 2–3 most relevant and explain why.
 
 | Category | Short description |
 |----------|------------------|
@@ -50,7 +53,7 @@ Read `refs/principles/principles-pandora.md` and `refs/principles/principles-des
 
 ## Draft paragraph
 
-Read `refs/template.md` and `refs/framework-design-ic.md`. Use the Growth Area Exemplars section to calibrate framing by level. If `job` in `user-cache.json` is a product designer role, apply the level-specific scope, responsibility, and accountability expectations.
+Read `refs/template.md` and the appropriate framework ref for the user's `job` (see Interview step 2). Use the Growth Area Exemplars section to calibrate framing by level. Apply the level-specific scope, responsibility, and accountability expectations.
 
 Generate one first-person paragraph:
 - Apply SBI structure: Situation → Behavior → Impact.
