@@ -7,6 +7,8 @@ Writing self-evaluations is easy — but good self-evaluations are hard, especia
 
 Relieve your pain with a simple Claude skill that helps you scaffold either your accomplishment or a growth area, scoped into individual topics.
 
+`self-eval` ships with `lemme-slack`: another lightweight skill that checks Slack (using Slack MCP) for past interactions to bolster your self-eval and refresh your memory. Adapted loosely on [Joan Chiang](https://github.com/joan-chiangwq)'s [slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) skill.
+
 </div>
 
 ## ⚒️ Usage
@@ -57,3 +59,7 @@ This installs both `/self-eval` and `/lemme-slack` into `~/.claude/skills/`. To 
 2. **Will I get promoted with the AI self-evaluation?** This skill helps you write, not do your job. 
 3. **What if I can't remember what I did?** Please try.
 4. **Is it cheap to run this skill?** Takes about <3K tokens to complete one paragraph.
+
+## 🙏🏻 Thank you
+
+A huge thank you to Joan for building the [slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) skill, which formed the base of the supplementary skill to this repo. [Slackback](https://github.com/joan-chiangwq/skillmaxxing/tree/main/.claude/skills/slackback) functions differently: it's a deeper dive that's more lightweight than `lemme-slack`, which is focused on summarisation.
